@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 /* Function prototypes */
-int main(int argc, char *argv[]);
+
 
 
 #endif /* SHELL_H */
