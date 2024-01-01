@@ -1,10 +1,19 @@
 #include "shell.h"
-
 /**
- * display_prompt - Displays a command prompt
+ * prompt - writes a prompt
+ *
+ * Return: 0 on sucess
  */
-
-void display_prompt(void)
+int prompt(void)
 {
-printf("chipo_shell:~$ ");
+	char *prompt = "$ ";
+	ssize_t writecount = 0;
+
+	if (isatty(STDIN_FILENO) == 1)
+	{
+		writecount = write(STDOUT_FILENO, prompt, 2);
+		if (writecount == -1)
+			exit(0);
+	}
+	return (0);
 }

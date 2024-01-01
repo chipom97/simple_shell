@@ -1,44 +1,40 @@
 #include "shell.h"
-
 /**
- * main - Entry point of the program
- * gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
- * Return: Always 0 (Success)
+ * main - point of entry
+ *
+ * Return: 0 on success
  */
-
 int main(void)
 {
-char *command;
-while (1)
-{
-display_prompt();
-command = read_command();
+	char *fullpathbuffer = NULL, *copy = NULL, *buffer = NULL;
+	char *PATH = NULL;
+	char **av = NULL;
+	int exitstatus = 0;
 
-if (strncasecmp(command, "exit", 4) == 0)
-{
-printf("Exiting the shell. Goodbye!\n");
-free(command);
-break;
-}
-
-if (feof(stdin))
-{
-puts("Received end-of-file. Exiting the shell. Goodbye!");
-free(command);
-break;
-}
-
-if (access(command, X_OK) == -1)
-{
-fprintf(stderr, "Error: Command '%s' not found.\n", command);
-}
-
-else
-{
-printf("You entered: %s\n", command);
-}
-free(command);
-}
-
-return (0);
+	signal(SIGINT, SIG_IGN);
+	PATH = _getenv("PATH");
+	if (PATH == NULL)
+		return (-1);
+	while (1)
+	{
+		av = NULL;
+		prompt();
+		buffer = _read();
+		if (*buffer != '\0')
+		{
+			av = tokenize(buffer);
+			if (av == NULL)
+			{
+				free(buffer);
+				continue;
+			}
+			fullpathbuffer = _fullpathbuffer(av, PATH, copy);
+			if (checkbuiltins(av, buffer, exitstatus) != 0)
+				continue;
+			exitstatus = _forkprocess(av, buffer, fullpathbuffer);
+		}
+		else
+			free(buffer);
+	}
+	return (0);
 }
