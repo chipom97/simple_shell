@@ -73,8 +73,9 @@ int main(void)
 		/* Tokenize the input into command and arguments */
 
 		token = strtok(input, " ");
-		int i = 0;
+		int i;
 
+		i = 0;
 		while (token != NULL)
 		{
 			args[i++] = token;
