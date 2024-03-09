@@ -16,8 +16,8 @@ else if (strcmp(args[0], "exit") == 0)
 {
 exit(0);
 }
-else if (strcmp(args[0], "ls") == 0)
+else if (strcmp(args[0], "/bin/ls") == 0)
 {
-handle_ls_command();
+handle_ls_command(args);
 }
 }

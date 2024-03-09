@@ -6,11 +6,11 @@
  * Return: (void)
  */
 extern char **environ;
-void handle_ls_command(void)
+void handle_ls_command(char **args)
 {
 pid_t pid;
 int status;
-
+(void)args;
 /* Create child process */
 pid = fork();
 if (pid < 0)
