@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 
 /* Function prototypes */
+extern char **environ;
 void run_shell(void);
 void tokenize_input(char *line, char **args);
 void handle_builtin(char **args);

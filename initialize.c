@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-* initialize_shel - check the code
+* initialize_shell - check the code
 *
 * Return: (0) Success.
 */

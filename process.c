@@ -30,6 +30,12 @@ exit(1);
 else
 {
 /* Parent process */
-waitpid(pid, &status, 0);
+/* Wait for child process to complete */
+if (waitpid(pid, &status, 0) == -1)
+{
+/* Error handling for waitpid failure */
+perror("waitpid failed");
+exit(1);
+}
 }
 }

@@ -3,13 +3,9 @@
 #define MAX_ARGS 10
 
 /**
-* main - check the code
-*
+* main - check the code*
 * Return: (0) Success.
 */
-
-/* Declaration of the environ variable */
-extern char **environ;
 
 int main(void)
 {
@@ -31,14 +27,15 @@ exit(1);
 /* Main shell loop */
 while (1) 
 {
-printf("HI:) ");
+printf("($) ");
 fflush(stdout);
 
 /* Read input line */
 if (getline(&line, &len, stdin) == -1) 
 {
 perror("getline failed");
-exit(1);
+/* Exit loop on error */
+break;
 }
 
 /* Tokenize input and execute command */

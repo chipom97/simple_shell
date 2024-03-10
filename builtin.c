@@ -26,4 +26,5 @@ else if (strcmp(args[0], "exit") == 0)
 {
 exit(0);
 }
+/* Other built-in cmmands here */
 }

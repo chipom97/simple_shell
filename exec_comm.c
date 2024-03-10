@@ -1,16 +1,12 @@
 #include "shell.h"
 
 /**
-* execute_command - check the code
+* execute_command - Function to execute external commands
 * @args: arguments
 * 
 * Return: (0) Success.
 */
 
-/* Declaration of the environ variable */
-extern char **environ;
-
-/* Function to execute external commands */
 void execute_command(char **args) 
 {
 pid_t pid;
@@ -37,6 +33,11 @@ exit(1);
 else 
 {
 /* Parent process */
-waitpid(pid, &status, 0);
+if (waitpid(pid, &status, 0) == -1)
+{
+/* Error handling for waitpid failure */
+perror("waitpid failed");
+exit(1);
+}
 }
 }

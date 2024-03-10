@@ -13,7 +13,7 @@ int i;
 
 i = 0;
 args[i] = strtok(line, " \n");
-while (args[i] != NULL)
+while (args[i] != NULL && i < MAX_ARGS - 1)
 {
 i++;
 args[i] = strtok(NULL, " \n");
