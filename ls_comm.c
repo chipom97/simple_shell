@@ -10,7 +10,7 @@ void handle_ls_command(char **args)
 {
 pid_t pid;
 int status;
-(void)args;
+/*(void)args;*/
 /* Create child process */
 pid = fork();
 if (pid < 0)
@@ -22,19 +22,15 @@ exit(1);
 else if (pid == 0)
 {
 /* Child process */
-char *ls_args[] = {"/bin/ls", NULL};
-execve(ls_args[0], ls_args, environ);
+/*char *ls_args[] = {"/bin/ls", NULL};*/
+execve(args[0], args, environ);
 /* If execve fails, print error message */
-perror("ls command execution failed");
+perror("execve failed");
 exit(1);
 }
 else
 {
 /* Parent process */
-if (waitpid(pid, &status, 0) == -1)
-{
-perror("waitpid failed");
-exit(1);
-}
+waitpid(pid, &status, 0);
 }
 }
