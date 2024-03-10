@@ -1,0 +1,42 @@
+#include "shell.h"
+
+/**
+* execute_command - check the code
+* @args: arguments
+* 
+* Return: (0) Success.
+*/
+
+/* Declaration of the environ variable */
+extern char **environ;
+
+/* Function to execute external commands */
+void execute_command(char **args) 
+{
+pid_t pid;
+int status;
+
+/* Create child process */
+pid = fork();
+if (pid < 0) 
+{
+/* Error handling for fork failure */
+perror("fork failed");
+exit(1);
+} 
+else if (pid == 0) 
+{
+/* Child process */
+if (execve(args[0], args, environ) == -1) 
+{
+/* If execvp fails, print error message */
+perror("execvp failed");
+exit(1);
+}
+} 
+else 
+{
+/* Parent process */
+waitpid(pid, &status, 0);
+}
+}

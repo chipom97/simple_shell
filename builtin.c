@@ -8,11 +8,21 @@
 */
 void handle_builtin(char **args)
 {
-if (strcmp(args[0], "cd") == 0)
+if (strcmp(args[0], "cd") == 0) 
 {
-chdir(args[1]);
+if (args[1] != NULL) 
+{
+if (chdir(args[1]) != 0) 
+{
+perror("cd failed");
 }
-else if (strcmp(args[0], "exit") == 0)
+} 
+else 
+{
+fprintf(stderr, "cd: missing argument\n");
+}
+} 
+else if (strcmp(args[0], "exit") == 0) 
 {
 exit(0);
 }
