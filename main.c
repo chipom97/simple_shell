@@ -14,8 +14,6 @@ char *line;
 char *args[MAX_ARGS];
 size_t len = 0;
 
-initialize_shell();
-
 /* Allocate memory for line */
 line = malloc(MAX_LINE_LENGTH * sizeof(char));
 if (line == NULL)
